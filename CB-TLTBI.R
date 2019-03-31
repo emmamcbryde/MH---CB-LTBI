@@ -5,7 +5,7 @@
 # setwd("M:/Documents/@Projects/MH - CB LTBI/")
 options(prompt = "R> ")
 
-
+library(knitr)
 # Load libraries. (not needed if using the *.rds data files objects)
 #library(tidyverse)
 #library(reshape2)
@@ -15,7 +15,8 @@ options(prompt = "R> ")
 #library(rlang)
 #library(diagram)
 #library(heemod)
-
+#install.packages('lazyeval')
+#install.packages('data.table')
 library(lazyeval) # required
 library(data.table) # required
 
@@ -134,7 +135,7 @@ year <- start.year # Initialise year with start.year
 markov.cycle <- 0 # Tracks the current cycle
 cycles <- 10 # Model run cycles
 n_cohorts_to_evaluate <- nrow(pop.master) # Can be adjusted to save running time if you don't want to evaluate the entire population
-n_cohorts_to_evaluate <- 10
+n_cohorts_to_evaluate <- 100
 
 # Creates and initialises the population output table for the model (markov.cycle = 0)
 # pop.output <- pop.master[YARP <= year & AGERP <= 40 & AGEP <= 40][, cycle := markov.cycle][1:100]

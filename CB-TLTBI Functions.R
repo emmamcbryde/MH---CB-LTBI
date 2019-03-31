@@ -4,6 +4,8 @@
 # TODO - implement DefineStates & DefineStrategy
 # The Define* series of functions are used to setup the Model
 
+library(data.table) 
+
 DefineStates <- function(...) {
 
     .dots <- lazyeval::lazy_dots(...)
@@ -84,10 +86,11 @@ CreateArgumentList <- function(state.names, state.number) {
 }
 
 # Look up the mortality rate from vic.mortality
+#    vic.mortality[Year == year & mrate == rate.assumption][DT, Rate, on = .(Age = AGEP, Sex = SEXP)]
 Get.MR <- function(DT, year, rate.assumption = "High") {
-
-    vic.mortality[Year == year & mrate == rate.assumption][DT, Rate, on = .(Age = AGEP, Sex = SEXP)]
-
+  require(data.table)
+  library(lazyeval) 
+          vic.mortality[Year == year & mrate == rate.assumption][DT, Rate, on = .(Age = AGEP, Sex = SEXP)]
 }
 
 # Look up the Reactivation rate
